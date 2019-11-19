@@ -1,6 +1,6 @@
-# DRLND - Continuous Control Project
+# DRLND - Collaboration and Competition Project
 
-Author: Lucas Takara  Date: 10/21/2019
+Author: Lucas Takara  Date: 11/19/2019
 
 
 ### Project Details
@@ -8,11 +8,11 @@ ___________
 
 ### Environment
 
-![Reacher Arm](https://raw.githubusercontent.com/hortovanyi/DRLND-Continuous-Control/master/output/reacherp_ddpg_agent_small.gif)
+![Tennis](https://unity3d.com/profiles/unity3d/themes/unity/images/pages/machinelearning/image2-2.gif)
 
 
 
-The goal of this project is to train an agent to maintain its position at the target location for as many as time steps as possible.
+In this project, we'll train two agents control rackets to bounce a ball over a net. The goal of each agent is to keep the ball in play.
 
 
 ### Details
@@ -20,14 +20,19 @@ The goal of this project is to train an agent to maintain its position at the ta
 This environment was developed on Unity Real-Time Development Platform and it has some peculiarities:
 
 
-- The second version of the environment, which will be implemented, contains 20 identical agents, each with its own copy of the environment.
+- If an agent hits the ball over the net, it receives a reward of +0.1.
 
-- A reward of +0.1 is provided for each step that the agent's hand is in the goal location
+- If an agent lets a ball hit the ground or hits the ball out of bounds, it receives a reward of -0.01.
 
 
-The observation space consists of **33** variables corresponding to position, rotation, velocity and angular velocities of the arm. Each action is a vector with 4 numbers, corresponding to torque applicable to two joints. Every entry in the action vector should be a number between -1 and 1.
+The observation space consists of **8** variables corresponding to position and  velocity of the ball and racket. Each agent receives its own, local observation. Two continuous actions are available, corresponding to movement toward (or away from) the net and jumping.
 
-The task is episodic and in order to solve the environment, your agents **must** get an `average score of +30 (over 100 consecutive episodes and over all 20 agents).`
+The task is episodic and in order to solve the environment, your agents **must** get an `average score of +0.5 (over 100 consecutive episodes, after taking the maximum over both agents).` 
+
+- After each episode, the rewards that each agent received are summed (without discounting), to get a score for each agent. This yields 2 (potentially different) scores. We then take the maximum of these 2 scores.
+
+- This yields a single score for each episode
+
 
 
 ### Installation
@@ -141,21 +146,13 @@ Other packages that may be installed are listed on the `requirements.txt` file.
 ### Step 2: Download the Unity Environment
 ____
 
-#### Version 1: One Agent
-
-- Linux: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P2/Reacher/one_agent/Reacher_Linux.zip)
-- Mac OSX: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P2/Reacher/one_agent/Reacher.app.zip)
-- Windows 32 bits: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P2/Reacher/one_agent/Reacher_Windows_x86.zip)
-- Windows 64 bits: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P2/Reacher/one_agent/Reacher_Windows_x86_64.zip)
-
-#### Version 2: Twenty Agents
-- Linux: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P2/Reacher/Reacher_Linux.zip)
-- Mac OSX: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P2/Reacher/Reacher.app.zip)
-- Windows 32 bits: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P2/Reacher/Reacher_Windows_x86.zip)
-- Windows 64 bits: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P2/Reacher/Reacher_Windows_x86_64.zip)
+- Linux: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Tennis/Tennis_Linux.zip)
+- Mac OSX: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Tennis/Tennis.app.zip)
+- Windows 32 bits: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Tennis/Tennis_Windows_x86.zip)
+- Windows 64 bits: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Tennis/Tennis_Windows_x86_64.zip)
 
 
-Once you've downloaded it, place the file in the **`p2_continuous-control/`** folder in the DRLND GitHub repository, and unzip (or decompress) the file.
+Once you've downloaded it, place the file in the **`p3_collab-compet/`** folder in the DRLND GitHub repository, and unzip (or decompress) the file.
 
 (For Windows users) Check out [this link](https://support.microsoft.com/en-us/help/827218/how-to-determine-whether-a-computer-is-running-a-32-bit-version-or-64) if you need help with determining if your computer is running a 32-bit version or 64-bit version of the Windows operating system.
 
@@ -178,11 +175,11 @@ In order to connect python with the environment, which is already saved in the W
 - `import numpy as np`
 - `from unityagents import UnityEnvironment`
 
-` env = UnityEnvironment(file_name="C:\Users\Lucas-PC\Downloads\Reacher_Windows_x86_64\Reacher.exe")`
+` env = UnityEnvironment(file_name="C:\Users\Lucas-PC\Downloads\Tennis_Windows_x86_64\Tennis.exe")`
 
 ### Step 5: Training and Testing the Agent
 ----
 
-Open `Continuous_Control.ipynb` file and follow the given instructions for training and testing your agent!
+Open `Tennis.ipynb` file and follow the given instructions for training and testing your agent!
 
 Good Luck!!
